@@ -26,6 +26,7 @@ const postFetch = async (url, body) => {
         body: JSON.stringify(body)
     })
     const data = await res.json()
+    
     return data
 
 }

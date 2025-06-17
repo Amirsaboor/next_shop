@@ -1,8 +1,10 @@
 'use client'
+import Link from "next/link";
 import Product from "./Product";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 export default function ProductsTab({ tabList, tabPanel }) {
+    
     return (
         <section className="food_section layout_padding-bottom">
             <div className="container">
@@ -40,9 +42,9 @@ export default function ProductsTab({ tabList, tabPanel }) {
                 </Tabs>
 
                 <div className="btn-box">
-                    <a href="">
+                    <Link href="/menu">
                         مشاهده بیشتر
-                    </a>
+                    </Link>
                 </div>
             </div>
         </section>
