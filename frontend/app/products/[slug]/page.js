@@ -1,4 +1,14 @@
-export default function Productspage() {
+import Product from "@/components/products/Product";
+import { getFetch } from "@/utils/fetch"
+import { getBlurDataUrl, numberFormat } from "@/utils/helper";
+import Image from "next/image";
+
+export default async function ProductsPage({ params }) {
+
+    const product = await getFetch(`/products/${decodeURI(params.slug)}`)
+    const randomProductCount = 4
+    const randomProducts = await getFetch(`/random-products?count=${randomProductCount}`)
+
     return (
         <>
             <section className="single_page_section layout_padding">
@@ -7,17 +17,24 @@ export default function Productspage() {
                         <div className="col-md-10 offset-md-1">
                             <div className="row gy-5">
                                 <div className="col-sm-12 col-lg-6">
-                                    <h3 className="fw-bold mb-4">پیتزا پپرونی</h3>
+                                    <h3 className="fw-bold mb-4">{product.name}</h3>
                                     <h5 className="mb-3">
-                                        <del>165,000</del>
-                                        135,000
-                                        تومان
+                                        {product.is_sale ?
+                                            <>
+                                                <del>{numberFormat(product.price)}</del>
+                                                {numberFormat(product.sale_price)}
+                                                تومان
+                                            </>
+                                            :
+                                            product.price
+                                        }
+
                                         <div className="text-danger fs-6">
-                                            10% تخفیف
+                                            {Math.round((product.price - product.sale_price) / product.price * 100)}%
+                                            تخفیف
                                         </div>
                                     </h5>
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
-                                        است.</p>
+                                    <p>{product.description}</p>
 
                                     <div className="mt-5 d-flex">
                                         <button className="btn-add">افزودن به سبد خرید</button>
@@ -37,22 +54,25 @@ export default function Productspage() {
                                         <div className="carousel-indicators">
                                             <button type="button" data-bs-target="#carouselExampleIndicators"
                                                 data-bs-slide-to="0" className="active"></button>
-                                            <button type="button" data-bs-target="#carouselExampleIndicators"
-                                                data-bs-slide-to="1"></button>
-                                            <button type="button" data-bs-target="#carouselExampleIndicators"
-                                                data-bs-slide-to="2"></button>
+                                            {product.images.map((img, index) => (
+                                                <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                    data-bs-slide-to={index + 1}></button>
+                                            ))}
                                         </div>
+
                                         <div className="carousel-inner">
                                             <div className="carousel-item active">
-                                                <img src="./images/p1.jpg" className="d-block w-100" alt="..." />
+                                                <Image src={product.primary_image} placeholder="blur" blurDataURL={getBlurDataUrl()} width={464} height={309} className="d-block w-100" alt="..." />
                                             </div>
-                                            <div className="carousel-item">
-                                                <img src="./images/p2.jpg" className="d-block w-100" alt="..." />
-                                            </div>
-                                            <div className="carousel-item">
-                                                <img src="./images/p3.jpg" className="d-block w-100" alt="..." />
-                                            </div>
+                                            {product.images.map(img => (
+                                                <div className="carousel-item">
+                                                    <Image src={img.image} placeholder="blur" blurDataURL={getBlurDataUrl()} width={464} height={309} className="d-block w-100" alt="..." />
+                                                </div>
+                                            ))}
+
+
                                         </div>
+
                                         <button className="carousel-control-prev" type="button"
                                             data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                                             <span className="carousel-control-prev-icon"></span>
@@ -70,127 +90,16 @@ export default function Productspage() {
                     </div>
                 </div>
             </section>
+
             <hr />
             <section className="food_section my-5">
                 <div className="container">
                     <div className="row gx-3">
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="box">
-                                <div>
-                                    <div className="img-box">
-                                        <img className="img-fluid" src="./images/b1.jpg" alt="" />
-                                    </div>
-                                    <div className="detail-box">
-                                        <h5>
-                                            لورم ایپسوم متن
-                                        </h5>
-                                        <p>
-                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                            از
-                                            طراحان
-                                            گرافیک است.
-                                        </p>
-                                        <div className="options">
-                                            <h6>
-                                                <del>45,000</del>
-                                                34,000
-                                                <span>تومان</span>
-                                            </h6>
-                                            <a href="">
-                                                <i className="bi bi-cart-fill text-white fs-5"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                        {randomProducts.map(product => (
+                            <div key={product.id} class="col-sm-6 col-lg-3">
+                                <Product product={product} />
                             </div>
-                        </div>
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="box">
-                                <div>
-                                    <div className="img-box">
-                                        <img className="img-fluid" src="./images/p4.jpg" alt="" />
-                                    </div>
-                                    <div className="detail-box">
-                                        <h5>
-                                            لورم ایپسوم متن
-                                        </h5>
-                                        <p>
-                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                            از
-                                            طراحان
-                                            گرافیک است.
-                                        </p>
-                                        <div className="options">
-                                            <h6>
-                                                121,000
-                                                <span>تومان</span>
-                                            </h6>
-                                            <a href="">
-                                                <i className="bi bi-cart-fill text-white fs-5"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="box">
-                                <div>
-                                    <div className="img-box">
-                                        <img className="img-fluid" src="./images/p1.jpg" alt="" />
-                                    </div>
-                                    <div className="detail-box">
-                                        <h5>
-                                            لورم ایپسوم متن
-                                        </h5>
-                                        <p>
-                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                            از
-                                            طراحان
-                                            گرافیک است.
-                                        </p>
-                                        <div className="options">
-                                            <h6>
-                                                121,000
-                                                <span>تومان</span>
-                                            </h6>
-                                            <a href="">
-                                                <i className="bi bi-cart-fill text-white fs-5"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="box">
-                                <div>
-                                    <div className="img-box">
-                                        <img className="img-fluid" src="./images/b2.jpg" alt="" />
-                                    </div>
-                                    <div className="detail-box">
-                                        <h5>
-                                            لورم ایپسوم متن
-                                        </h5>
-                                        <p>
-                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                            از
-                                            طراحان
-                                            گرافیک است.
-                                        </p>
-                                        <div className="options">
-                                            <h6>
-                                                51,000
-                                                <span>تومان</span>
-                                            </h6>
-                                            <a href="">
-                                                <i className="bi bi-cart-fill text-white fs-5"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>

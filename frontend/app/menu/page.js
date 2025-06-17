@@ -1,4 +1,4 @@
-import CategoriesList from "@/components/menu/CategorisList";
+import CategoriesList from "@/components/menu/CategoriesList";
 import ProductsList from "@/components/menu/ProductsList";
 import Search from "@/components/menu/Search";
 import Sort from "@/components/menu/Sort";
