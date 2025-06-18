@@ -1,10 +1,9 @@
 import BootstrapClient from "@/components/libraries/Bootstrap";
 import "./globals.css";
 import Header from "@/components/layout/Header";
-import ToastContainer from '@/components/libraries/Toastify'
+import Toastify from "@/components/libraries/Toastify"
 import Footer from "@/components/layout/Footer";
-import NextNprogress from "@/components/libraries/nextNprogress";
-
+import NextNprogress from "@/components/libraries/NextNprogress";
 
 export default function RootLayout({ children }) {
   return (
@@ -13,9 +12,10 @@ export default function RootLayout({ children }) {
         <NextNprogress>
           <Header />
           {children}
+
           <Footer />
-          <ToastContainer />
           <BootstrapClient />
+          <Toastify />
         </NextNprogress>
       </body>
     </html>

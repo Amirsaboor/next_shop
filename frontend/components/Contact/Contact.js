@@ -1,7 +1,11 @@
+import dynamic from "next/dynamic";
 import FormContact from "./Form";
-import Map from "./Map";
 
 export default function Contact() {
+    const Map = dynamic(
+        () => import('./Map'),
+        { ssr: false }
+    );
 
     return (
         <section className="book_section layout_padding">
@@ -15,6 +19,7 @@ export default function Contact() {
                     <div className="col-md-6">
                         <FormContact />
                     </div>
+
                     <div className="col-md-6">
                         <div className="map_container ">
                             <Map />

@@ -6,9 +6,9 @@ const nextConfig = {
             {
                 protocol: 'http',
                 hostname: 'localhost'
-            },
-        ],
-    },
+            }
+        ]
+    }
 };
 
 export default nextConfig;

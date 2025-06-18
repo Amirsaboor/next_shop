@@ -1,10 +1,10 @@
-'use client'
+"use client"
+
 import Link from "next/link";
 import Product from "./Product";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+
 export default function ProductsTab({ tabList, tabPanel }) {
-    
     return (
         <section className="food_section layout_padding-bottom">
             <div className="container">
@@ -13,13 +13,12 @@ export default function ProductsTab({ tabList, tabPanel }) {
                         منو محصولات
                     </h2>
                 </div>
-                <Tabs selectedTabClassName='active'>
+
+                <Tabs selectedTabClassName={'active'}>
                     <TabList>
-
                         <ul className="filters_menu">
-                            {tabList.map((tab, index) => (
-                                <Tab key={index} className="" >{tab}</Tab>
-
+                            {tabList.map((list, index) => (
+                                <Tab key={index}>{list}</Tab>
                             ))}
                         </ul>
                     </TabList>
@@ -35,10 +34,8 @@ export default function ProductsTab({ tabList, tabPanel }) {
                                     ))}
                                 </div>
                             </TabPanel>
-
                         ))}
                     </div>
-
                 </Tabs>
 
                 <div className="btn-box">

@@ -1,6 +1,7 @@
 import Image from "next/image";
-import aboutImage from '@/public/images/about-img.png'
-export default function AboutUs() {
+import aboutImage from '../public/images/about-img.png'
+
+export default function About() {
     return (
         <section className="about_section layout_padding">
             <div className="container">
@@ -8,7 +9,7 @@ export default function AboutUs() {
                 <div className="row">
                     <div className="col-md-6 ">
                         <div className="img-box">
-                            <Image src={aboutImage} alt="" />
+                            <Image src={aboutImage} width={445} height={608} alt="about-image" />
                         </div>
                     </div>
                     <div className="col-md-6">

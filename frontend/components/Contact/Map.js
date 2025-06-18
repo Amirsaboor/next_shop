@@ -1,26 +1,29 @@
-'use client'
+"use client"
+
 import { useEffect } from "react";
 import 'leaflet/dist/leaflet.css';
-import 'leaflet/dist/leaflet.js';
+import 'leaflet/dist/leaflet.js'
 
 export default function Map() {
     useEffect(() => {
+        document.getElementById('contact-map').innerHTML = "<div id='map' style='height: 345px'></div>"
 
-        const map = L.map('map').setView([36.316386, 59.585641], 15);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        var map = L.map('map').setView([35.700105, 51.400394], 14);
+        var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
         }).addTo(map);
-        L.marker([36.316386, 59.585641], {
+        var marker = L.marker([35.700105, 51.400394], {
             icon: L.icon({
                 popupAnchor: [12, 6],
                 iconUrl: 'images/map/marker-icon.png',
-                shadowUrl: 'images/map/marker-shadow.png',
+                shadowUrl: 'images/map/marker-shadow.png'
             })
         }).addTo(map)
-            .bindPopup('<b>Fast Food</b>').openPopup();
-    }, []);
+            .bindPopup('<b>webprog</b>').openPopup();
+    }, [])
+
 
     return (
-        <div id='map' style={{ height: '345px' }}></div>
-    );
+        <div id="contact-map"></div>
+    )
 }

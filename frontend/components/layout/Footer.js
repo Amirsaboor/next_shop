@@ -18,7 +18,7 @@ export default function Footer() {
                                 <a href="">
                                     <div className="d-flex justify-content-center">
                                         <i className="bi bi-telephone-fill" aria-hidden="true"></i>
-                                        <p className="my-0" style={{direction: 'ltr'}}>
+                                        <p className="my-0" style={{ direction: 'ltr' }}>
                                             0910 000 0000
                                         </p>
                                     </div>
@@ -35,7 +35,7 @@ export default function Footer() {
                     <div className="col-md-4 footer-col">
                         <div className="footer_detail">
                             <a href="" className="footer-logo">
-                                Fast Food
+                                webprog.io
                             </a>
                             <p>
                                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
